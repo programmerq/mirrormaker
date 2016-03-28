@@ -1,0 +1,5 @@
+set base_path    /var/www/docker
+
+deb https://packages.docker.com/1.10/apt/repo ubuntu-trusty main
+
+clean https://packages.docker.com/1.10/apt/repo
