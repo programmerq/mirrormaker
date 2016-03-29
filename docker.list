@@ -1,0 +1,1 @@
+deb [arch=amd64] http://{{.Host}}:{{.Port}}/1.10/apt/repo ubuntu-trusty main

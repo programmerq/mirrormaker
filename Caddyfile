@@ -1,0 +1,6 @@
+:2015
+
+root /var/www/mirror/packages.docker.com/
+browse
+log stdout
+templates / .repo .list .html .sh

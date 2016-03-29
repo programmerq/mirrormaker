@@ -1,4 +1,4 @@
-[docker-main-repo]
+[yum]
 name=Docker main Repository
 baseurl=https://packages.docker.com/1.10/yum/repo/main/centos/7
 enabled=1

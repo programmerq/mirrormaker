@@ -1,4 +1,4 @@
-set base_path    /var/www/docker
+set base_path    /var/www
 
 deb https://packages.docker.com/1.10/apt/repo ubuntu-trusty main
 

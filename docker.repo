@@ -1,0 +1,6 @@
+[yum]
+name=Docker Mirror Repository
+baseurl=http://{{.Host}}:{{.Port}}/1.10/yum
+enabled=1
+gpgcheck=1
+gpgkey=http://{{.Host}}:{{.Port}}/1.10/repo.key

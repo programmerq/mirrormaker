@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Docker Mirror Repo</title>
+	</head>
+	<body>
+		<p>
+			Welcome to your Docker Mirror Repository. You have several options for
+			installation. You can point your configuration management tools to the
+			<a href="./docker.repo">yum</a> or <a href="./docker.list">apt</a>
+			repositories directly.
+		</p>
+
+		<p>You can also use the install script. For example with curl</p>
+
+		<pre><code>curl -sSL http://{{.Host}}:{{.Port}}/install.sh</code></pre>
+	</body>
+</html>
