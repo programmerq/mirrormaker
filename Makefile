@@ -1,7 +1,7 @@
 SHELL   := /bin/bash
 VERSION := 1.10
 
-.PHONY: help all mirrormaker mirror mirrorserver build clean run push
+.PHONY: help all mirrormaker mirror mirrorserver build force-build untag clean run push
 
 help: ## This help message
 	@echo -e "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/\\x1b[36m\1\\x1b[m:\2/' | column -c2 -t -s :)"
@@ -34,6 +34,12 @@ mirrorserver: mirror
 	fi
 
 build: mirrorserver ## build the mirror server
+
+force-build: untag mirrorserver ## force a rebuild while keeping the cache
+
+untag:
+	docker rmi --no-prune -f mirrormaker:${VERSION} || true
+	docker rmi --no-prune -f mirrorserver:${VERSION} || true
 
 clean: ## start from scratch
 	rm -rf mirror
