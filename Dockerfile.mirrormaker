@@ -1,8 +1,7 @@
 FROM ubuntu:trusty
 
-ENV CS_VERSION=1.10 \
-    CADDY_VERSION=0.8.2
-
+VOLUME /var/www/mirror
+ENV CS_VERSION=1.10
 ENV WWW_ROOT=/var/www/mirror/packages.docker.com/${CS_VERSION}
 
 RUN apt-get update && \
@@ -17,31 +16,7 @@ ADD etc/mirror.list /etc/apt
 # mirroring for rpms
 ADD etc/docker-main.repo /etc/yum.repos.d/
 
-# script to grab the package signing key
-ADD scripts/get-key.sh /
+# script to grab the package signing key and make the mirror
+ADD scripts/* /usr/local/bin/
 
-RUN mkdir -p ${WWW_ROOT}
-
-WORKDIR ${WWW_ROOT}
-
-# get the key
-RUN /get-key.sh ${WWW_ROOT}
-
-# get the rpms
-RUN touch /etc/yum.conf && \
-    reposync -r yum -p ${WWW_ROOT} && \
-    createrepo ${WWW_ROOT}/yum && \
-    # get the debs
-    apt-mirror
-
-EXPOSE 2015
-
-RUN curl -sLO https://github.com/mholt/caddy/releases/download/v${CADDY_VERSION}/caddy_linux_amd64.tar.gz && \
-    tar zxvf caddy_linux_amd64.tar.gz && \
-    mv caddy /usr/bin/caddy && chmod 755 /usr/bin/caddy && \
-    rm -rf caddy* *txt
-
-ADD etc/Caddyfile /etc
-ADD templates/* ${WWW_ROOT}/../
-
-CMD ["caddy", "-conf", "/etc/Caddyfile"]
+CMD ["/usr/local/bin/make-mirror.sh", "/var/www/mirror/packages.docker.com/1.10"]
