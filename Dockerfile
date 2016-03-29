@@ -12,10 +12,10 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # mirroring for debs
-ADD mirror.list /etc/apt
+ADD etc/mirror.list /etc/apt
 
 # mirroring for rpms
-ADD docker-main.repo /etc/yum.repos.d/
+ADD etc/docker-main.repo /etc/yum.repos.d/
 
 # script to grab the package signing key
 ADD get-key.sh /
@@ -41,7 +41,7 @@ RUN curl -sLO https://github.com/mholt/caddy/releases/download/v${CADDY_VERSION}
     mv caddy /usr/bin/caddy && chmod 755 /usr/bin/caddy && \
     rm -rf caddy* *txt
 
-ADD Caddyfile /etc
+ADD etc/Caddyfile /etc
 ADD templates/* ${WWW_ROOT}/../
 
 CMD ["caddy", "-conf", "/etc/Caddyfile"]
