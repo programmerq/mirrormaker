@@ -42,9 +42,6 @@ RUN curl -sLO https://github.com/mholt/caddy/releases/download/v${CADDY_VERSION}
     rm -rf caddy* *txt
 
 ADD Caddyfile /etc
-ADD index.html ${WWW_ROOT}/..
-ADD docker.list ${WWW_ROOT}/..
-ADD docker.repo ${WWW_ROOT}/..
-ADD install.sh ${WWW_ROOT}/..
+ADD templates/* ${WWW_ROOT}/../
 
 CMD ["caddy", "-conf", "/etc/Caddyfile"]
