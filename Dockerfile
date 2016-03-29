@@ -18,7 +18,7 @@ ADD etc/mirror.list /etc/apt
 ADD etc/docker-main.repo /etc/yum.repos.d/
 
 # script to grab the package signing key
-ADD get-key.sh /
+ADD scripts/get-key.sh /
 
 RUN mkdir -p ${WWW_ROOT}
 
