@@ -41,8 +41,10 @@ untag:
 	docker rmi --no-prune -f mirrormaker:${VERSION} || true
 	docker rmi --no-prune -f mirrorserver:${VERSION} || true
 
-clean: ## start from scratch
+clean-mirror:  ## clear the mirror content
 	rm -rf mirror
+
+clean: clean-mirror ## start from scratch
 	docker rmi -f mirrormaker:${VERSION} || true
 	docker rmi -f mirrorserver:${VERSION} || true
 
